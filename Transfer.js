@@ -1,5 +1,5 @@
 const Web3 = require("web3");
-const web3 = new Web3("https://testapi.cicscan.com");
+const web3 = new Web3("http://188.40.131.185:22000");
 const timeLockABi = require("./timeLockABI.json");
 require("dotenv").config();
 
@@ -18,7 +18,7 @@ async function transferCheck() {
 
     if (Number(unlock_time) < Number(currTime)) {
       console.log("Release Time", releaseTime, currTime);
-
+      console.log("Remaining Quarter  : ", remainingQuarter);
       if (
         Number(releaseTime) < Number(currTime) &&
         Number(remainingQuarter) != 0
@@ -26,13 +26,16 @@ async function transferCheck() {
         console.log("Working");
 
         await signTransaction();
-      } else if (Number(remainingQuarter) === 0) {
+      } 
+      else if (Number(remainingQuarter) === 0) {
         clearInterval(myInterval);
         process.exit(0);
       }
-    } else {
-      console.log("releaseTime not reached yet");
-      console.log("Remaining Quarter  : ", remainingQuarter);
+
+      else {
+        console.log("releaseTime not reached yet");
+        console.log("Remaining Quarter  : ", remainingQuarter);
+      }
     }
   } catch (error) {
     console.log("Error", error);
