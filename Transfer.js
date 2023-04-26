@@ -21,24 +21,18 @@ async function transferCheck() {
 
       if (
         Number(releaseTime) < Number(currTime) &&
-        Number(releaseTime) < Number(time) &&
         Number(remainingQuarter) != 0
       ) {
         console.log("Working");
 
         await signTransaction();
-      }   else if (Number(releaseTime) > Number(currTime) && Number(remainingQuarter) != 0 ){
-        console.log("releaseTime not reached yet");
-        console.log("Remaining Quarter  : ",remainingQuarter)
       } else if (Number(remainingQuarter) === 0) {
         clearInterval(myInterval);
         process.exit(0);
       }
-
-     else if (Number(releaseTime) > Number(currTime)) {
-        console.log("releaseTime not reached yet");
-        console.log("Remaining Quarter  : ", remainingQuarter);
-      }
+    } else {
+      console.log("releaseTime not reached yet");
+      console.log("Remaining Quarter  : ", remainingQuarter);
     }
   } catch (error) {
     console.log("Error", error);
