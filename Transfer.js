@@ -17,7 +17,8 @@ async function transferCheck() {
     let time = await contract.methods.time().call();
 
     if (Number(unlock_time) < Number(currTime)) {
-      console.log("Release Time", releaseTime, currTime);
+      let releaseDate = new Date(releaseTime *1000);
+      console.log("Release Time",releaseDate);
       console.log("Remaining Quarter  : ", remainingQuarter);
       if (
         Number(releaseTime) < Number(currTime) &&
@@ -32,17 +33,17 @@ async function transferCheck() {
         process.exit(0);
       }
 
-      else {
-        console.log("releaseTime not reached yet");
-        console.log("Remaining Quarter  : ", remainingQuarter);
-      }
+      // else {
+      //   console.log("releaseTime not reached yet");
+      //   console.log("Remaining Quarter  : ", remainingQuarter);
+      // }
     }
   } catch (error) {
     console.log("Error", error);
   }
 }
 
-let myInterval = setInterval(transferCheck, 10 * 1000);
+let myInterval = setInterval(transferCheck, 1 * 1000);
 
 async function signTransaction() {
   try {
